@@ -4,6 +4,7 @@ This repository contains the results and methodology of a comprehensive **static
 
 ## 📂 Repository Structure
 
+  ```sql
 /
 ├── README.md ← This file
 ├── apk-analysis/
@@ -17,6 +18,7 @@ This repository contains the results and methodology of a comprehensive **static
 │ ├── screenshots/ ← All annotated screenshots
 │ └── analysis-report.md ← Full audit report in Markdown
 └── pentest-report.pdf ← Dynamic testing (Burp Suite) report
+```
 
 pgsql
 Copiar
@@ -30,28 +32,16 @@ Editar
    cp build/app/outputs/flutter-apk/app-release.apk WhistleTime-release.apk
 Static decompilation with apktool
 
-bash
-Copiar
-Editar
 apktool d WhistleTime-release.apk -o apk-analysis/wt-apktool
 Java/Smali extraction with jadx
 
-bash
-Copiar
-Editar
 jadx -d apk-analysis/wt-jadx WhistleTime-release.apk
 Search for sensitive strings
 
-bash
-Copiar
-Editar
 grep -R "SharedPreferences" -n apk-analysis/wt-jadx
 grep -R "AIza"             -n apk-analysis/wt-apktool/res/values/strings.xml
 Extract Flutter AOT literals
 
-bash
-Copiar
-Editar
 strings apk-analysis/wt-apktool/lib/arm64-v8a/libapp.so \
   | grep "https://"
 📑 Audit Report
